@@ -1,3 +1,5 @@
+source("s3-bb-starter.R")
+
 ## test data for bb():
 texttest <- "Bedeutet nach jedem Vokal oder Diphtong die Konsonanten..."
 test_vec <- strsplit(texttest, " ")[[1]]
@@ -8,12 +10,12 @@ test_listoflists <- list(as.list(test_vec), list(test_vec))
 test_factor <- factor(test_vec)
 test_ordered <- ordered(test_vec)
 
-str(bb(test_vec))
-str(bb(test_matrix))
-str(bb(test_list))
-str(bb(test_listoflists))
-str(bb(test_factor))
-str(bb(test_ordered))
+# str(bb(test_vec))
+# str(bb(test_matrix))
+# str(bb(test_list))
+# str(bb(test_listoflists))
+# str(bb(test_factor))
+# str(bb(test_ordered))
 
 #-------------------------------------------------------------------------------
 # tests:
@@ -42,13 +44,13 @@ expect_bb(bb(test_array),
 
 expect_bb(bb(test_list),
           bb_testvec)
+
 sapply(bb(test_list), expect_is, class = "bb") -> null
 
 expect_bb(bb(test_listoflists),
           c(bb_testvec, bb_testvec))
 rapply(bb(test_listoflists), expect_is, class = "bb", classes = "ANY") -> null
 expect_length(bb(test_listoflists), 2)
-
 
 expect_equivalent(levels(bb(test_factor)),
                   sort(bb_testvec)[c(1, 3, 2, 4:8)]) #alphabetic order changes!
